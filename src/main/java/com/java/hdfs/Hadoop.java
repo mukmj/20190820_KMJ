@@ -117,7 +117,6 @@ public class Hadoop {
 				// 대상 복사 파일에 넣기
 				fsos.write(byteRead);					
 			}
-
 			fsis.close();
 			fsos.close();
 		} catch (Exception e) {
@@ -176,5 +175,4 @@ public class Hadoop {
 		System.out.println("Hadoop.resultData() >> End");
 		return sb.toString();
 	}
-
 }
