@@ -166,19 +166,18 @@ public class Hadoop {
 		if(hadoopSystem.exists(targetPath)){
 			// 정제 결과 대상 파일 읽어 오기
 			FSDataInputStream fsis = hadoopSystem.open(targetPath);
-//			int byteRead = 0;
-//			while((byteRead = fsis.read()) > 0) { 
-//				// 정제 결과를 문자열 변수에 담기
-//				sb.append(byteRead);
-//			}
-//			fsis.close();
-			
-			BufferedReader br = new BufferedReader(new InputStreamReader(fsis));
-			String line = "";
-			while((line = br.readLine()) != null || !(line = br.readLine()).equals("")) {
-				sb.append(line);
+			int byteRead = 0;
+			while((byteRead = fsis.read()) > 0) { 
+				// 정제 결과를 문자열 변수에 담기
+				sb.append((char)byteRead);
 			}
 			fsis.close();
+//			BufferedReader br = new BufferedReader(new InputStreamReader(fsis));
+//			String line = "";
+//			while((line = br.readLine()) != null) {
+//				sb.append(line);
+//			}
+//			fsis.close();
 		}
 		System.out.println("Hadoop.resultData() >> End");
 		return sb.toString();
