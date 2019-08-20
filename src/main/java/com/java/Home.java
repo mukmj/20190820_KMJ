@@ -26,7 +26,7 @@ public class Home extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("Home.doPost() >> Start");
 		// 정제 요청 대상 파일명 변수
-		String file_name = req.getParameter("file_name");		
+		String file_name = req.getParameter("file_name");
 		if(file_name == null || ("").equals(file_name)) {
 			// 정제 요청 대상 파일명 값이 없으면 Home 화면 요청
 			res.sendRedirect("/Home");

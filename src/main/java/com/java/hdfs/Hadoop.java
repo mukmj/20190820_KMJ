@@ -41,6 +41,7 @@ public class Hadoop {
 		resultMap = new HashMap<String, Object>();
 		int status = 0;
 		// Hadoop 시스템 접속 하기 위하여 확인 요청
+	
 		if(init(fileName)) {
 			/**************************************************
 			 * >> 상태값 설정 << 
@@ -53,21 +54,25 @@ public class Hadoop {
 			 * 2) 정제 요청 : mapReduser()
 			 * 3) 성공 시 결과 받기 : resultData()
 			 **************************************************/
+
 			try {
 				fileCopy(fileName);
 			} catch (Exception e) {
+				e.printStackTrace();
 				status = 0;
 			}
 			
 			try {
 				mapReduser();
 			} catch (Exception e) {
+				e.printStackTrace();
 				status = 1;
 			}
 			
 			try {
 				resultData();
 			} catch (Exception e) {
+				e.printStackTrace();
 				status = 2;
 			}
 		}
