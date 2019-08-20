@@ -174,8 +174,8 @@ public class Hadoop {
 //			fsis.close();
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(fsis));
-			String line = br.readLine();
-			while(line != null || !line.equals("")) {
+			String line = "";
+			while((line = br.readLine()) != null || !(line = br.readLine()).equals("")) {
 				sb.append(line);
 			}
 			fsis.close();
