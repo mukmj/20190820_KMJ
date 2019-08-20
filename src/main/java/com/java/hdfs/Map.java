@@ -18,7 +18,11 @@ public class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 		String[] col = value.toString().split(",");
 		// 출력 키에 넣을 문자열 변수
 		int val = 0;
-		if(!col[4].equals("NA")) {
+//		if(!col[4].equals("NA")) {
+//			val = 1;
+//		}
+		
+		if(Integer.parseInt(col[21]) == 0) {
 			val = 1;
 		}
 		

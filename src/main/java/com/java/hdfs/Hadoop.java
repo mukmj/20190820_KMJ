@@ -158,7 +158,7 @@ public class Hadoop {
 	// 정제 결과 데이터 가져오기 메소드
 	protected String resultData() throws IOException {
 		System.out.println("Hadoop.resultData() >> Start");
-		// 정제 결과 데이터 경로 객체 생성
+		// 정제 결과 데이터 경로 객체 생성 
 		Path targetPath = new Path(OUTPUT + TARGET);
 		// 결과 문자열에 담기 위한 변수
 		StringBuilder sb = new StringBuilder();
@@ -172,12 +172,6 @@ public class Hadoop {
 				sb.append((char)byteRead);
 			}
 			fsis.close();
-//			BufferedReader br = new BufferedReader(new InputStreamReader(fsis));
-//			String line = "";
-//			while((line = br.readLine()) != null) {
-//				sb.append(line);
-//			}
-//			fsis.close();
 		}
 		System.out.println("Hadoop.resultData() >> End");
 		return sb.toString();
