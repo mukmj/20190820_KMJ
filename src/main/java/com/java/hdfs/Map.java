@@ -12,12 +12,19 @@ public class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 	// 출력 키 변수
 	protected Text textKey = new Text();
 	// 출력 값 변수
-	protected IntWritable intValue = new IntWritable(1);
+	protected IntWritable intValue;
 	
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context) throws IOException, InterruptedException {
 		String[] col = value.toString().split(",");
 		// 출력 키에 넣을 문자열 변수
+
+		if(col[4].equals("NA")) {
+			intValue = new IntWritable(0);
+		}else {
+			intValue = new IntWritable(1);
+		}
+		
 		String strKey = col[8];
 		// 출력 키에 문자열 변수 적용
 		textKey.set(strKey);
