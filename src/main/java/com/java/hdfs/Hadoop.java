@@ -23,7 +23,8 @@ public class Hadoop {
 	protected Configuration localConf = null;
 	// hadoop 접속 주소 (hadoop server ip 수정 할것) <<<<<<<<<<<<<<<<<<
 	protected final String URL = "hdfs://192.168.3.43:9000";
-	protected final String LOCAL = "/root/data/";
+	//protected final String LOCAL = "/root/data/";
+	protected final String LOCAL = "D:\\data\\";
 	// hadoop 정제 대상 경로 / 처리 결과 저장 경로 및 파일
 	protected final String INPUT = "/input/";
 	protected final String OUTPUT = "/output";
@@ -41,7 +42,7 @@ public class Hadoop {
 		resultMap = new HashMap<String, Object>();
 		int status = 0;
 		// Hadoop 시스템 접속 하기 위하여 확인 요청
-	
+		System.out.println(LOCAL + fileName);
 		if(init(fileName)) {
 			/**************************************************
 			 * >> 상태값 설정 << 
@@ -55,25 +56,16 @@ public class Hadoop {
 			 * 3) 성공 시 결과 받기 : resultData()
 			 **************************************************/
 
-			try {
-				fileCopy(fileName);
-			} catch (Exception e) {
-				e.printStackTrace();
-				status = 0;
-			}
-			
-			try {
-				mapReduser();
-			} catch (Exception e) {
-				e.printStackTrace();
-				status = 1;
-			}
-			
-			try {
-				resultData();
-			} catch (Exception e) {
-				e.printStackTrace();
-				status = 2;
+			if(fileCopy(fileName)) {
+				try {
+					mapReduser();
+					String result = resultData();
+					status = 2;
+					resultMap.put("result", result);
+				} catch (Exception e) {
+					e.printStackTrace();
+					status = 1;
+				}
 			}
 		}
 		resultMap.put("status", status);
@@ -117,12 +109,14 @@ public class Hadoop {
 			FSDataInputStream fsis = localSystem.open(filePath);
 			// 대상 복사 만들기 
 			FSDataOutputStream fsos = hadoopSystem.create(inputPath);
+
 			int byteRead = 0;
 			// 원본 데이터 한줄씩 읽어 오기
 			while ((byteRead = fsis.read()) > 0) {
 				// 대상 복사 파일에 넣기
 				fsos.write(byteRead);					
 			}
+
 			fsis.close();
 			fsos.close();
 		} catch (Exception e) {
